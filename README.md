@@ -1,5 +1,5 @@
-# HW4-Grup4
-Grup 4 Ödev
+# HW4-Grup2
+Grup 2 Ödev
 
 Basit bir e-ticaret apisi geliştirin.
 
