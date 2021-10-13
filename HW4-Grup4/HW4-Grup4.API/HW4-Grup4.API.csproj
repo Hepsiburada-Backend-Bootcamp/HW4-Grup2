@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>HW4_Grup4.API</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HW4-Grup4.Application\HW4-Grup4.Application.csproj" />
+    <ProjectReference Include="..\HW4-Grup4.Infrastructure\HW4-Grup4.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

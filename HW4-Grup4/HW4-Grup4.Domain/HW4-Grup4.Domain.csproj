@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>HW4_Grup4.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>
