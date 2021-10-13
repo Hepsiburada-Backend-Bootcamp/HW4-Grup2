@@ -5,4 +5,8 @@
     <RootNamespace>HW4_Grup4.Domain</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.13.2" />
+  </ItemGroup>
+
 </Project>

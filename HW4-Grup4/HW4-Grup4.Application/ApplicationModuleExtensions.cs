@@ -17,13 +17,14 @@ namespace HW4_Grup4.Application
     {
         public static IServiceCollection AddApplicationModule(this IServiceCollection services, IConfiguration configuration)
         {
-            
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddInfrastructureModule(configuration);
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderDetailService, OrderDetailService>();
 
             return services;
         }

@@ -4,12 +4,7 @@ using HW4_Grup4.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW4_Grup4.Infrastructure
 {
@@ -22,7 +17,10 @@ namespace HW4_Grup4.Infrastructure
             options.UseSqlServer(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IMongoDbContext, MongoContext>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailMongoRepository, OrderDetailMongoRepository>();
+            services.AddScoped<IUserMongoRepository, UserMongoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
