@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using HW4_Grup4.Application.DTOs;
+using System.Threading.Tasks;
 
 namespace HW4_Grup4.Application.ServiceInterfaces
 {
     public interface IUserService
     {
-        Task Add();
+        Task<UserDto> GetUserById(int id);
     }
 }

@@ -17,12 +17,12 @@ namespace HW4_Grup4.API.Controllers
             _orderDetailService = orderDetailService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCampaignsAsync()
-        {
-            await _userService.Add();
-            //_orderDetailService.InsertOrderDetailToMongoDb(new Domain.Entities.OrderDetail());
-            return Ok();
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetCampaignsAsync()
+        //{
+        //    await _userService.Add();
+        //    //_orderDetailService.InsertOrderDetailToMongoDb(new Domain.Entities.OrderDetail());
+        //    return Ok();
+        //}
     }
 }

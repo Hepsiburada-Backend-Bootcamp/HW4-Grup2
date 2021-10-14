@@ -21,10 +21,12 @@ namespace HW4_Grup4.Infrastructure
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IMongoDbContext, MongoContext>();
             services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<IOrderDetailMongoRepository, OrderDetailMongoRepository>();
+            services.AddScoped<IOrderMongoRepository, OrderMongoRepository>();
             services.AddScoped<IUserMongoRepository, UserMongoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserDapperRepository, UserDapperRepository>();
+            services.AddScoped<IProductDapperRepository, ProductDapperRepository>();
+            services.AddScoped<IOrderDapperRepository, OrderDapperRepository>();
 
             return services;
         }

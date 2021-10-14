@@ -1,5 +1,8 @@
-﻿using HW4_Grup4.Application.ServiceInterfaces;
+﻿using AutoMapper;
+using HW4_Grup4.Application.DTOs;
+using HW4_Grup4.Application.ServiceInterfaces;
 using HW4_Grup4.Domain.Entities;
+using HW4_Grup4.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,49 +12,26 @@ namespace HW4_Grup4.Application.Services
 {
     public class ProductService : IProductService
     {
-        public Task<Product> AddAsync(Product entity)
+        private readonly IProductDapperRepository _productDapperRepository;
+        private readonly IMapper _mapper;
+
+        public ProductService(IProductDapperRepository productDapperRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _productDapperRepository = productDapperRepository;
+            _mapper = mapper;
         }
 
-        public Task<IEnumerable<Product>> AddRangeAsync(IEnumerable<Product> entities)
+        public async Task AddAsync(ProductDto entity)
         {
-            throw new NotImplementedException();
+            var productDbObject = _mapper.Map<Product>(entity);
+            await _productDapperRepository.AddProductAsync(productDbObject);
         }
 
-        public Task<IEnumerable<Product>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Product> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Product entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveRange(IEnumerable<Product> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Product> SingleOrDefaultAsync(Expression<Func<Product, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Product Update(Product entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Product>> Where(Expression<Func<Product, bool>> predicate)
-        {
-            throw new NotImplementedException();
+        public async Task<List<ProductDto>> GetProductsById(List<int> productIdList)
+        { 
+            var result = await _productDapperRepository.GetProductsById(productIdList);
+            var productDtoList = _mapper.Map<List<ProductDto>>(result);
+            return productDtoList;
         }
     }
 }

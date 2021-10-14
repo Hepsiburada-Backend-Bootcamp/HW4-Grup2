@@ -9,10 +9,8 @@ namespace HW4_Grup4.Application.DTOs
 {
     public class UserDto
     {
-        public Guid Id { get; set; }
-        [Required(ErrorMessage="{0} alanı boş olamaz.")]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string Email { get; set; }
     }
 }

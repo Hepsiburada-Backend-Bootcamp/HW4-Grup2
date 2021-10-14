@@ -16,29 +16,21 @@ namespace HW4_Grup4.API.Controllers
             _orderService = orderService;
         }
 
-
-
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public ActionResult<OrderDto> CreateOrder([FromBody] OrderDto campaign)
+        public ActionResult CreateOrder([FromBody] OrderDto order)
         {
             try
             {
-                _orderService.AddAsync(campaign);
-
-                return Ok(campaign);
+                _orderService.AddAsync(order);
+                return Ok();
             }
             catch
             {
                 return BadRequest();
             }
         }
-
-
-
-
-
 
         //[Route("passive")]
         //[HttpPut]

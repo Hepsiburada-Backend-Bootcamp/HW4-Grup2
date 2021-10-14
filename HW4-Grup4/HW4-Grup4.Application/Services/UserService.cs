@@ -1,4 +1,5 @@
-﻿using HW4_Grup4.Application.ServiceInterfaces;
+﻿using HW4_Grup4.Application.DTOs;
+using HW4_Grup4.Application.ServiceInterfaces;
 using HW4_Grup4.Domain.Repositories;
 using System.Threading.Tasks;
 
@@ -17,14 +18,13 @@ namespace HW4_Grup4.Application.Services
             _userDapperRepository = userDapperRepository;
         }
 
-        public async Task Add()
+        public async Task<UserDto> GetUserById(int id)
         {
-            //User user = new User();
+            var result = await _userDapperRepository.GetUserById(id);
 
-            //_userMongoRepository.AddAsync(user);
-            //await _userRepository.AddAsync(user);
-            var result = await _userDapperRepository.GetUser(1);
-            var q = 3;
+            var userDto = new UserDto { Id = result.Id, LastName = result.LastName, Name = result.Name };
+
+            return userDto;
         }
     }
 }

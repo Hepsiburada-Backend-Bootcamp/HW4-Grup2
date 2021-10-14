@@ -8,7 +8,7 @@ namespace HW4_Grup4.Domain.Entities
 {
     public class Product
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

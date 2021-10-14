@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HW4_Grup4.Domain.Repositories
 {
-    public interface IOrderDetailMongoRepository : IMongoRepository<OrderDetail>
+    public interface IOrderMongoRepository : IMongoRepository<OrderDetail>
     {
     }
 }

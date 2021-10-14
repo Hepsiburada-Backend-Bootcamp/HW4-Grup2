@@ -11,7 +11,8 @@ namespace HW4_Grup4.Infrastructure.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false)
                 },
@@ -24,7 +25,8 @@ namespace HW4_Grup4.Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -37,12 +39,13 @@ namespace HW4_Grup4.Infrastructure.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TotalPrice = table.Column<double>(type: "float", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderNumber = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,17 +55,18 @@ namespace HW4_Grup4.Infrastructure.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "OrderItems",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Piece = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     ItemPrice = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
@@ -79,7 +83,54 @@ namespace HW4_Grup4.Infrastructure.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, "Apple iPad", 1000f },
+                    { 2, "Samsung Smart TV", 1500f },
+                    { 3, "Nokia 3310", 500f },
+                    { 4, "Dell Mouse", 250f },
+                    { 5, "Samsung Monitor", 1000f }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "LastName", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Birinci", "Ali" },
+                    { 2, "Baltacı", "İlker" },
+                    { 3, "Kocatepe", "Mustafa" },
+                    { 4, "Aykan", "Mehmet Emin" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "Address", "CreatedAt", "OrderNumber", "TotalPrice", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "ankara", new DateTime(2021, 10, 14, 22, 26, 20, 685, DateTimeKind.Local).AddTicks(2042), 1, 1500.0, 1 },
+                    { 3, "izmir", new DateTime(2021, 10, 14, 22, 26, 20, 691, DateTimeKind.Local).AddTicks(934), 3, 2500.0, 1 },
+                    { 2, "istanbul", new DateTime(2021, 10, 14, 22, 26, 20, 691, DateTimeKind.Local).AddTicks(900), 2, 2000.0, 2 },
+                    { 4, "adana", new DateTime(2021, 10, 14, 22, 26, 20, 691, DateTimeKind.Local).AddTicks(938), 4, 3000.0, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrderItems",
+                columns: new[] { "Id", "ItemPrice", "OrderId", "ProductId", "Quantity" },
+                values: new object[,]
+                {
+                    { 1, 1000.0, 1, 1, 1 },
+                    { 2, 500.0, 1, 3, 1 },
+                    { 4, 1500.0, 3, 2, 1 },
+                    { 5, 1000.0, 3, 5, 1 },
+                    { 3, 1000.0, 2, 1, 2 },
+                    { 6, 1000.0, 4, 3, 6 }
                 });
 
             migrationBuilder.CreateIndex(

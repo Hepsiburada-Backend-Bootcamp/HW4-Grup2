@@ -6,6 +6,6 @@ namespace HW4_Grup4.Domain.Repositories
 {
     public interface IUserDapperRepository : IDapperRepository<User>
     {
-        Task<List<User>> GetUser(int id);
+        Task<User> GetUserById(int id);
     }
 }
