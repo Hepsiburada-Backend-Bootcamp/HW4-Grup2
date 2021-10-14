@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace HW4_Grup4.Domain.Services
+namespace HW4_Grup4.Application.ServiceInterfaces
 {
     public interface IUserService
     {

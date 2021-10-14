@@ -14,9 +14,11 @@ namespace HW4_Grup4.Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Product23 { get; set; }
+
         public User User { get; set; }
+
         public Product Product { get; set; }
+
         public Order Order { get; set; }
 
     }

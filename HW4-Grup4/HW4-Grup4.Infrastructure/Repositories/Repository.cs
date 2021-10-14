@@ -19,6 +19,7 @@ namespace HW4_Grup4.Infrastructure.Repositories
             _context = context;
             _dbSet = context.Set<TEntity>();
         }
+
         public async Task AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
@@ -28,6 +29,7 @@ namespace HW4_Grup4.Infrastructure.Repositories
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)

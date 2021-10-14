@@ -1,12 +1,5 @@
-﻿using HW4_Grup4.Domain.Entities;
-using HW4_Grup4.Domain.Repositories;
-using HW4_Grup4.Infrastructure.Context;
-using MongoDB.Bson;
+﻿using HW4_Grup4.Domain.Repositories;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace HW4_Grup4.Infrastructure.Repositories
 {

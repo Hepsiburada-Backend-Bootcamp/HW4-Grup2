@@ -1,9 +1,4 @@
-﻿using HW4_Grup4.Domain.Entities;
-using MongoDB.Bson;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace HW4_Grup4.Domain.Repositories
+﻿namespace HW4_Grup4.Domain.Repositories
 {
     public interface IMongoRepository<TEntity> where TEntity : class
     {

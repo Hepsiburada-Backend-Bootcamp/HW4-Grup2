@@ -9,7 +9,9 @@ namespace HW4_Grup4.Domain.Entities
     public class Product
     {
         public Guid Id { get; set; }
+
         public string Name { get; set; }
+
         public float Price { get; set; }
     }
 }
