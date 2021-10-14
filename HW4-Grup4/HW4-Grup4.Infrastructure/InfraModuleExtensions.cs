@@ -14,7 +14,9 @@ namespace HW4_Grup4.Infrastructure
             this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(options => 
-            options.UseSqlServer(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+                options.UseSqlServer(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName))); 
+            services.AddDbContext<DapperContext>(options => 
+                options.UseSqlServer(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IMongoDbContext, MongoContext>();
@@ -22,6 +24,7 @@ namespace HW4_Grup4.Infrastructure
             services.AddScoped<IOrderDetailMongoRepository, OrderDetailMongoRepository>();
             services.AddScoped<IUserMongoRepository, UserMongoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserDapperRepository, UserDapperRepository>();
 
             return services;
         }

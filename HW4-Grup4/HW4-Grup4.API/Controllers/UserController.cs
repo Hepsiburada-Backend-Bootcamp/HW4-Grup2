@@ -1,9 +1,5 @@
-﻿using HW4_Grup4.Domain.Services;
-using Microsoft.AspNetCore.Http;
+﻿using HW4_Grup4.Application.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HW4_Grup4.API.Controllers
@@ -22,10 +18,10 @@ namespace HW4_Grup4.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCampaignsAsync()
+        public async Task<IActionResult> GetCampaignsAsync()
         {
-            _userService.Add();
-            _orderDetailService.InsertOrderDetailToMongoDb(new Domain.Entities.OrderDetail());
+            await _userService.Add();
+            //_orderDetailService.InsertOrderDetailToMongoDb(new Domain.Entities.OrderDetail());
             return Ok();
         }
     }

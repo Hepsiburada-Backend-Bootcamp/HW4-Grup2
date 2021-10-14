@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace HW4_Grup4.Infrastructure.Context
 {
-    public class MongoContext :IMongoDbContext
+    public class MongoContext : IMongoDbContext
     {
         private static IMongoDatabase _db;
         private static MongoClient _client;

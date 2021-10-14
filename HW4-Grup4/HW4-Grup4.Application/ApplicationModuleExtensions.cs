@@ -1,14 +1,9 @@
-﻿using HW4_Grup4.Application.Services;
-using HW4_Grup4.Domain.Services;
+﻿using HW4_Grup4.Application.ServiceInterfaces;
+using HW4_Grup4.Application.Services;
 using HW4_Grup4.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace HW4_Grup4.Application
