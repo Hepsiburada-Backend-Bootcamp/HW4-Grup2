@@ -1,5 +1,10 @@
 ﻿using HW4_Grup4.Domain.Repositories;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace HW4_Grup4.Infrastructure.Repositories
 {
@@ -12,10 +17,36 @@ namespace HW4_Grup4.Infrastructure.Repositories
             _items = context.db.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
-        public void AddAsync(TEntity entity)
+        public virtual void AddAsync(TEntity entity)
         {
             _items.InsertOne(entity);
         }
+
+        public virtual IQueryable<TEntity> GetAll()
+        {
+            return  _items.AsQueryable();
+        }
+
+        public virtual Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> condition)
+            => _items.Find(condition).FirstOrDefaultAsync();
+
+        public virtual Task<TEntity> GetByKeyAsync(object key)
+        {
+           return _items.Find(FilterId(key)).SingleOrDefaultAsync();
+        }     
+
+        protected FilterDefinition<TEntity> FilterId(object key)
+        {
+            if (key is Guid guidKey)
+            {
+                return Builders<TEntity>.Filter.Eq(new StringFieldDefinition<TEntity, Guid>("_id"), guidKey);
+            }
+
+            return Builders<TEntity>.Filter.Eq("_id", ObjectId.Parse(key.ToString()));
+        }
+
+
+
 
         //public List<TEntity> Get()
         //{

@@ -14,12 +14,15 @@ namespace HW4_Grup4.Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        public double TotalPrice { get; set; }
 
-        //public User User { get; set; }
+        public string Address { get; set; }
 
-        //public Product Product { get; set; }
+        public int OrderNumber { get; set; }
 
-        public Order Order { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public virtual User User { get; set; }
 
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

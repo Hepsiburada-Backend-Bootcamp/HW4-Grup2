@@ -35,14 +35,14 @@ namespace HW4_Grup4.Application.Services
             _productService = productService;
         }
 
-        public async Task AddRangeAsync(IEnumerable<OrderDto> entities)
+        public async Task AddRangeAsync(IEnumerable<CreateOrderDto> entities)
         {
             var orderDbObjectList = _mapper.Map<List<Order>>(entities);
 
             await _orderRepository.AddRangeAsync(orderDbObjectList);
         }
 
-        public async Task AddAsync(OrderDto entity)
+        public async Task AddAsync(CreateOrderDto model)
         {
             //var orderItemList = new List<OrderItem>();
 
@@ -50,7 +50,7 @@ namespace HW4_Grup4.Application.Services
 
             var orderItemObjectListWithoutMapper = new List<OrderItem>();
 
-            foreach (var item in entity.OrderItems)
+            foreach (var item in model.OrderItems)
             {
                 var tmpOrderItem = new OrderItem
                 {
@@ -64,14 +64,14 @@ namespace HW4_Grup4.Application.Services
 
             var order = new Order
             {
-                Id = entity.Id,
-                UserId = entity.UserId,
-                Address = entity.Address,
+                //Id = model.Id,
+                UserId = model.UserId,
+                Address = model.Address,
                 CreatedAt = DateTime.Now,
                 OrderItems = orderItemObjectListWithoutMapper,
-                OrderNumber = entity.OrderNumber,
-                TotalPrice = entity.TotalPrice,
-                User = new User { Id = entity.UserId }
+                OrderNumber = new Random().Next(0, 10000), //TODO: Unique bir değer oluşturulacak.
+                TotalPrice = model.TotalPrice,
+                //User = new User { Id = model.UserId }
             };
 
             //OrderDetailService.instance.WriteDataToMongo(entity)
@@ -82,6 +82,16 @@ namespace HW4_Grup4.Application.Services
 
             var result = await AddOrderInformationToMongoDb(order);
         }
+        public IQueryable<OrderDetail> GetAll()
+        {
+            return _orderMongoRepository.GetAll();
+        }
+
+        public async Task<OrderDetail> GetByIdAsync(string id)
+        {
+            return await _orderMongoRepository.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
 
         public async Task<bool> AddOrderInformationToMongoDb(Order order)
         {
@@ -98,23 +108,19 @@ namespace HW4_Grup4.Application.Services
 
             OrderDetail orderDetail = new OrderDetail
             {
-                Order = new Order
-                {
-                    Address = order.Address,
-                    CreatedAt = order.CreatedAt,
-                    Id = order.Id,
-                    OrderNumber = order.OrderNumber,
-                    TotalPrice = order.TotalPrice,
-                    UserId = order.UserId,
-                    User = new User { Id = user.Id, LastName = user.LastName, Name = user.Name },
-                    OrderItems = orderItems
-                }
+                Address = order.Address,
+                CreatedAt = order.CreatedAt,
+                OrderNumber = order.OrderNumber,
+                TotalPrice = order.TotalPrice,
+                User = new User { Id = user.Id, LastName = user.LastName, Name = user.Name },
+                OrderItems = orderItems                
             };
 
             _orderMongoRepository.AddAsync(orderDetail);
 
             return true;
         }
+
 
     }
 }

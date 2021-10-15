@@ -20,7 +20,7 @@ namespace HW4_Grup4.API.Controllers.v1
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public ActionResult CreateOrder([FromBody] OrderDto order)
+        public ActionResult CreateOrder([FromBody] CreateOrderDto order)
         {
             try
             {
@@ -31,6 +31,32 @@ namespace HW4_Grup4.API.Controllers.v1
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public ActionResult Get() 
+        {
+            var result = _orderService.GetAll();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public ActionResult Get([FromRoute] string id)
+        {
+            var result = _orderService.GetByIdAsync(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result.Result);
         }
 
         //[Route("passive")]

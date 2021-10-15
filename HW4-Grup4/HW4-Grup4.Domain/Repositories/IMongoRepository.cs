@@ -1,8 +1,17 @@
-﻿namespace HW4_Grup4.Domain.Repositories
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+namespace HW4_Grup4.Domain.Repositories
 {
-    public interface IMongoRepository<TEntity> where TEntity : class
+    public interface IMongoRepository<TEntity>  where TEntity : class
     {
         void AddAsync(TEntity entity);
+        IQueryable<TEntity> GetAll();
+        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> condition);
+        Task<TEntity> GetByKeyAsync(object key);
+
 
         //List<TEntity> Get();
         //TEntity Get(string id);

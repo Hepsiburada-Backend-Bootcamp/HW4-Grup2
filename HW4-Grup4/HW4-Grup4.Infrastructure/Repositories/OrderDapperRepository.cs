@@ -36,27 +36,23 @@ namespace HW4_Grup4.Infrastructure.Repositories
             using (IDbConnection db = new System.Data.SqlClient.SqlConnection(_config.GetConnectionString(Connectionstring)))
             {
                 var orderAddQuery = $"Insert into orders (TotalPrice, Address, CreatedAt, OrderNumber, UserId)" +
-                $" Values({order.TotalPrice}, '{order.Address}', GETDATE(), {order.Id}, {order.User.Id} )";
+                $" Values({order.TotalPrice}, '{order.Address}', GETDATE(), {order.OrderNumber}, {order.UserId} ) select CAST(SCOPE_IDENTITY() AS INT)";
 
-                await db.ExecuteAsync(orderAddQuery);
-
-                var getMaxOrderIdQuery = "select max(id) from orders";
-
-                var getMaxOrderId = await db.QueryFirstAsync<int>(getMaxOrderIdQuery);
+                var orderId = await db.ExecuteScalarAsync(orderAddQuery);
 
                 var orderItemAddQuery = string.Empty;
 
                 foreach (var item in order.OrderItems)
                 {
                     orderItemAddQuery += $" Insert into orderItems (OrderId, ProductId, Quantity, ItemPrice)" +
-                    $" Values({getMaxOrderId}, {item.ProductId}, {item.Quantity}, {item.ItemPrice})";
+                    $" Values({orderId}, {item.ProductId}, {item.Quantity}, {item.ItemPrice})";
 
                     orderAddQuery += orderItemAddQuery;
                 }             
 
                 await db.ExecuteAsync(orderItemAddQuery);
 
-                return getMaxOrderId;
+                return (int)orderId;
             }
         }
 

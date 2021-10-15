@@ -15,7 +15,7 @@ namespace HW4_Grup4.Application.Mapping
         {
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Product, ProductDto>().ReverseMap();
-            CreateMap<Order, OrderDto>().ReverseMap();
+            CreateMap<Order, CreateOrderDto>().ReverseMap();
         }
         
     }
