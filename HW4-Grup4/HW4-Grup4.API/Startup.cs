@@ -1,20 +1,11 @@
+using HW4_Grup4.API.Extensions;
 using HW4_Grup4.Application;
-using HW4_Grup4.Domain.Repositories;
-using HW4_Grup4.Infrastructure.Context;
-using HW4_Grup4.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HW4_Grup4.API
 {
@@ -37,6 +28,8 @@ namespace HW4_Grup4.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HW4_Grup4.API", Version = "v1" });
             });
+
+            services.ConfigureApiVersion();
 
         }
 

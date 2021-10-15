@@ -8,10 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace HW4_Grup4.API.Controllers
+namespace HW4_Grup4.API.Controllers.v1
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/products")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;

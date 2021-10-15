@@ -3,10 +3,11 @@ using HW4_Grup4.Application.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace HW4_Grup4.API.Controllers
+namespace HW4_Grup4.API.Controllers.v1
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/orders")]
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
