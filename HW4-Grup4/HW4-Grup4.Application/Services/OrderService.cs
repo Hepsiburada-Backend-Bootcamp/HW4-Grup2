@@ -91,8 +91,10 @@ namespace HW4_Grup4.Application.Services
         {
             return await _orderMongoRepository.FirstOrDefaultAsync(x => x.Id == id);
         }
-
-
+        public IQueryable<OrderDetail> GetByUserIdAsync(int id) //TODO : Geriye dönüş modelimiz içerisinde User bulunmalı mı?
+        {
+            return  _orderMongoRepository.Get(x => x.User.Id == id);
+        }
         public async Task<bool> AddOrderInformationToMongoDb(Order order)
         {
             var user = await _userService.GetUserById(order.UserId);

@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace HW4_Grup4.Infrastructure.Repositories
 
         public virtual IQueryable<TEntity> GetAll()
         {
-            return  _items.AsQueryable();
+            return _items.AsQueryable();
         }
 
         public virtual Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> condition)
@@ -32,8 +33,14 @@ namespace HW4_Grup4.Infrastructure.Repositories
 
         public virtual Task<TEntity> GetByKeyAsync(object key)
         {
-           return _items.Find(FilterId(key)).SingleOrDefaultAsync();
-        }     
+            return _items.Find(FilterId(key)).SingleOrDefaultAsync();
+        }
+
+        public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> condition)
+        { 
+            return GetAll().Where(condition);
+        }
+        
 
         protected FilterDefinition<TEntity> FilterId(object key)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace HW4_Grup4.Domain.Repositories
         IQueryable<TEntity> GetAll();
         Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> condition);
         Task<TEntity> GetByKeyAsync(object key);
+
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> condition);
 
 
         //List<TEntity> Get();

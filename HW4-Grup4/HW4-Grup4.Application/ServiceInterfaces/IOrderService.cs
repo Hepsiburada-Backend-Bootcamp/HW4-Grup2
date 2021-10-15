@@ -11,7 +11,7 @@ namespace HW4_Grup4.Application.ServiceInterfaces
         Task AddRangeAsync(IEnumerable<CreateOrderDto> entities);
         Task AddAsync(CreateOrderDto order);
         IQueryable<OrderDetail> GetAll();
-
         Task<OrderDetail> GetByIdAsync(string id);
+        IQueryable<OrderDetail> GetByUserIdAsync(int id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using HW4_Grup4.Application.DTOs;
 using HW4_Grup4.Application.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Net;
 
 namespace HW4_Grup4.API.Controllers.v1
@@ -57,6 +58,19 @@ namespace HW4_Grup4.API.Controllers.v1
                 return NotFound();
             }
             return Ok(result.Result);
+        }
+
+        [HttpGet("user/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public ActionResult GetOrderByUserId([FromRoute] int id)
+        {
+            var result = _orderService.GetByUserIdAsync(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result.ToList());
         }
 
         //[Route("passive")]
