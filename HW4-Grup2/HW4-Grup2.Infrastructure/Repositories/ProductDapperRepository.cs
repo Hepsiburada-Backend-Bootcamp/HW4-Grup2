@@ -25,10 +25,23 @@ namespace HW4_Grup2.Infrastructure.Repositories
             using (IDbConnection db = new System.Data.SqlClient.SqlConnection(_config.GetConnectionString(Connectionstring)))
             {
                 
-                var query = $"Insert into products (Id,Name, Price)" +
-                $" Values('{product.Id}', '{product.Name}',  {product.Price})";
+                var query = "Insert into Products (Name, Price)" +
+                $" Values('{product.Name}',  {product.Price})";
 
                 await db.ExecuteAsync(query);
+            }
+        }
+        
+
+        public async Task<List<Product>> GetProductsAsync()
+        {
+            using (IDbConnection db = new System.Data.SqlClient.SqlConnection(_config.GetConnectionString(Connectionstring)))
+            {
+                var query = $"select * from Products";
+
+                var productList = await db.QueryAsync<Product>(query);
+
+                return productList.ToList();
             }
         }
 
@@ -41,6 +54,17 @@ namespace HW4_Grup2.Infrastructure.Repositories
                 var productList = await db.QueryAsync<Product>(query);
 
                 return productList.ToList();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (IDbConnection db = new System.Data.SqlClient.SqlConnection(_config.GetConnectionString(Connectionstring)))
+            {
+               
+                var query = "Delete from products where Id = @Id";
+
+                db.Execute(query, new { Id = id });
             }
         }
 
