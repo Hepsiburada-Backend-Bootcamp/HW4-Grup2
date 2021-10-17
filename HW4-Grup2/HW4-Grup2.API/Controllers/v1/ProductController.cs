@@ -1,5 +1,6 @@
 ﻿using HW4_Grup2.Application.DTOs;
 using HW4_Grup2.Application.ServiceInterfaces;
+using HW4_Grup2.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,18 +26,48 @@ namespace HW4_Grup2.API.Controllers.v1
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public ActionResult CreateProduct([FromBody] ProductDto product)
+        public async Task<ActionResult> CreateProduct([FromBody] ProductDto product)
         {
-            try
-            {
-                _productService.AddAsync(product);
+            
+             await _productService.AddAsync(product);
 
-                return Ok();
-            }
-            catch
+             return Ok();
+            
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProducts()
+        {
+            var result = await _productService.GetProducts();
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetProductById(int id)
+        {
+            List<int> ids = new List<int>();
+            ids.Add(id);
+            var result = await _productService.GetProductsById(ids);
+            if (result == null)
             {
                 return BadRequest();
+            } 
+            else
+            {
+                return Ok(result);
             }
+            
         }
+
+        [HttpDelete("id")]
+        public IActionResult Delete(int id)
+        {
+            _productService.Delete(id);
+
+            return NoContent();
+            
+        }
+        
     }
 }

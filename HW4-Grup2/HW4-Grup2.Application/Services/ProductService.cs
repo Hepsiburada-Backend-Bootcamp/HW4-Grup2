@@ -27,11 +27,29 @@ namespace HW4_Grup2.Application.Services
             await _productDapperRepository.AddProductAsync(productDbObject);
         }
 
+        public async Task<List<Product>> GetProducts()
+        {
+            var result = await _productDapperRepository.GetProductsAsync();
+
+            return result;
+        }
+
         public async Task<List<ProductDto>> GetProductsById(List<int> productIdList)
         { 
             var result = await _productDapperRepository.GetProductsById(productIdList);
             var productDtoList = _mapper.Map<List<ProductDto>>(result);
             return productDtoList;
+        }
+
+        public async Task<List<Product>> GetProductsByIdProduct(List<int> productIdList)
+        {
+            var result = await _productDapperRepository.GetProductsById(productIdList);
+            return result;
+        }
+
+        public void Delete(int id)
+        {
+            _productDapperRepository.Delete(id);
         }
     }
 }

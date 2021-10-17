@@ -100,7 +100,7 @@ namespace HW4_Grup2.Application.Services
             var user = await _userService.GetUserById(order.UserId);
             var orderItems = await _orderDapperRepository.GetOrderItemsAsync(order.Id);
             var productIds = orderItems.Select(x => x.ProductId).ToList();
-            var productItems = await _productService.GetProductsById(productIds);
+            var productItems =  await _productService.GetProductsByIdProduct(productIds);
 
             foreach (var item in orderItems)
             {

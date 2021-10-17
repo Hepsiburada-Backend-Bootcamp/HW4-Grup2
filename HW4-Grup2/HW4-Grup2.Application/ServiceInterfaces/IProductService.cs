@@ -12,5 +12,8 @@ namespace HW4_Grup2.Application.ServiceInterfaces
     {
         Task AddAsync(ProductDto product);
         Task<List<ProductDto>> GetProductsById(List<int> productIdList);
+        Task<List<Product>> GetProducts();
+        Task<List<Product>> GetProductsByIdProduct(List<int> productIdList);
+        void Delete(int id);
     }
 }

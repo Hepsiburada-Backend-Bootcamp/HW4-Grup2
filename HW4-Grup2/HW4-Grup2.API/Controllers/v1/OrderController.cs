@@ -3,6 +3,7 @@ using HW4_Grup2.Application.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace HW4_Grup2.API.Controllers.v1
 {
@@ -40,7 +41,8 @@ namespace HW4_Grup2.API.Controllers.v1
         public ActionResult Get() 
         {
             var result = _orderService.GetAll();
-            if (result == null)
+            
+            if (result.Count() == 0)
             {
                 return NotFound();
             }
@@ -50,14 +52,14 @@ namespace HW4_Grup2.API.Controllers.v1
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public ActionResult Get([FromRoute] string id)
+        public async Task<ActionResult> Get([FromRoute] string id)
         {
-            var result = _orderService.GetByIdAsync(id);
+            var result = await _orderService.GetByIdAsync(id);
             if (result == null)
             {
                 return NotFound();
             }
-            return Ok(result.Result);
+            return Ok(result);
         }
 
         [HttpGet("user/{id}")]
@@ -65,8 +67,8 @@ namespace HW4_Grup2.API.Controllers.v1
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public ActionResult GetOrderByUserId([FromRoute] int id)
         {
-            var result = _orderService.GetByUserIdAsync(id);
-            if (result == null)
+            var result =  _orderService.GetByUserIdAsync(id);
+            if (result.Count() == 0)
             {
                 return NotFound();
             }
