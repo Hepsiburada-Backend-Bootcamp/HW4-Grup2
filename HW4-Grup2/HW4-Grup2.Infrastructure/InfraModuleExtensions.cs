@@ -1,6 +1,8 @@
-﻿using HW4_Grup2.Domain.Repositories;
+﻿using HW4_Grup2.Domain.Entities;
+using HW4_Grup2.Domain.Repositories;
 using HW4_Grup2.Infrastructure.Context;
 using HW4_Grup2.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ namespace HW4_Grup2.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName))); 
             services.AddDbContext<DapperContext>(options => 
                 options.UseSqlServer(configuration.GetConnectionString("Default"), b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+            services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IMongoDbContext, MongoContext>();
@@ -27,7 +30,6 @@ namespace HW4_Grup2.Infrastructure
             services.AddScoped<IUserDapperRepository, UserDapperRepository>();
             services.AddScoped<IProductDapperRepository, ProductDapperRepository>();
             services.AddScoped<IOrderDapperRepository, OrderDapperRepository>();
-
             return services;
         }
     }

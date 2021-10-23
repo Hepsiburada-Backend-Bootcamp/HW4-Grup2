@@ -36,9 +36,9 @@ namespace HW4_Grup2.API.Controllers.v1
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetProducts(FilterDto filter)
         {
-            var result = await _productService.GetProducts();
+            var result = await _productService.GetProducts(filter);
 
             return Ok(result);
         }

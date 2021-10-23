@@ -9,5 +9,6 @@ namespace HW4_Grup2.Domain.Repositories
 {
     public interface IProductRepository: IRepository<Product>
     {
+
     }
 }

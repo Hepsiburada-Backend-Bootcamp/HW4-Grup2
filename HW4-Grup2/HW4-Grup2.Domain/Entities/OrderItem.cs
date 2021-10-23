@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HW4_Grup2.Domain.Entities
 {
     public class OrderItem
     {
+        [Key]
         public int Id { get; set; }
 
         public int OrderId { get; set; }

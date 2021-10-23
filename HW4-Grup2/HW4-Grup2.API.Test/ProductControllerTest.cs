@@ -65,11 +65,11 @@ namespace HW4_Grup2.API.Test
         public async void GetProducts_ActionExecutes_ReturnOkResult()
         {
             List<Product> product = null;
-            _mockProductService.Setup(repo => repo.GetProducts()).ReturnsAsync(product);
-            var result = await _controller.GetProducts();
+            _mockProductService.Setup(repo => repo.GetProducts(new FilterDto())).ReturnsAsync(product);
+            var result = await _controller.GetProducts(new FilterDto());
             var OkObejectResult = Assert.IsType<OkObjectResult>(result);
             //Assert.IsType<List<Product>>(OkObejectResult.Value);
-            _mockProductService.Verify(repo => repo.GetProducts(), Times.Once);
+            _mockProductService.Verify(repo => repo.GetProducts(new FilterDto()), Times.Once);
         }
 
         [Theory]

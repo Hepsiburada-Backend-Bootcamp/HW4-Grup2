@@ -1,5 +1,6 @@
 ﻿using HW4_Grup2.Application.DTOs;
 using HW4_Grup2.Application.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net;
@@ -19,6 +20,7 @@ namespace HW4_Grup2.API.Controllers.v1
             _orderService = orderService;
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

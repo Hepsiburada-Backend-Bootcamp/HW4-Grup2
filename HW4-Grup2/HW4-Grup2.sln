@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW4-Grup2.Domain", "HW4-Gru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW4-Grup2.Infrastructure", "HW4-Grup2.Infrastructure\HW4-Grup2.Infrastructure.csproj", "{99AFE654-4A95-43E4-ADB7-443A314DCC00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW4-Grup2.API.Test", "HW4-Grup2.API.Test\HW4-Grup2.API.Test.csproj", "{29CAD5CC-4E36-47C3-A461-6B833F6E272C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW4-Grup2.API.Test", "HW4-Grup2.API.Test\HW4-Grup2.API.Test.csproj", "{29CAD5CC-4E36-47C3-A461-6B833F6E272C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C2126093-E24C-4C60-9F8E-76D4F2CEE9BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{29CAD5CC-4E36-47C3-A461-6B833F6E272C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29CAD5CC-4E36-47C3-A461-6B833F6E272C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29CAD5CC-4E36-47C3-A461-6B833F6E272C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2126093-E24C-4C60-9F8E-76D4F2CEE9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2126093-E24C-4C60-9F8E-76D4F2CEE9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2126093-E24C-4C60-9F8E-76D4F2CEE9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2126093-E24C-4C60-9F8E-76D4F2CEE9BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

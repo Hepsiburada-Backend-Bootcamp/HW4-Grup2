@@ -1,7 +1,11 @@
-﻿using HW4_Grup2.API.Controllers.v1;
+﻿using AutoMapper;
+using HW4_Grup2.API.Controllers.v1;
 using HW4_Grup2.Application.DTOs;
 using HW4_Grup2.Application.ServiceInterfaces;
+using HW4_Grup2.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -16,13 +20,21 @@ namespace HW4_Grup2.API.Test
     {
         private readonly Mock<IUserService> _mockUserService;
         private readonly Mock<IOrderDetailService> _mockOrderDetailService;
+        private readonly Mock<UserManager<User>> _mockUserManager;
+        private readonly Mock<RoleManager<Role>> _mockRoleManager;
+        private readonly Mock<IOptionsSnapshot<JwtSettingsDto>> _mockJwtOptions;
+        private readonly Mock<IMapper> _mockMapper;
         private readonly UserController _controller;
         private List<UserDto> usersDto;
         public UserControllerTest()
         {
             _mockUserService = new Mock<IUserService>();
             _mockOrderDetailService = new Mock<IOrderDetailService>();
-            _controller = new UserController(_mockUserService.Object, _mockOrderDetailService.Object);
+            _mockUserManager = new Mock<UserManager<User>>();
+            _mockRoleManager = new Mock<RoleManager<Role>>();
+            _mockJwtOptions = new Mock<IOptionsSnapshot<JwtSettingsDto>>();
+            _mockMapper = new Mock<IMapper>();
+            _controller = new UserController(_mockUserService.Object, _mockOrderDetailService.Object, _mockUserManager.Object, _mockRoleManager.Object, _mockJwtOptions.Object, _mockMapper.Object);
 
             usersDto = new List<UserDto>()
             {
